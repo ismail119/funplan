@@ -17,7 +17,7 @@ async def meetings(meeting_id: Optional[int] = None):
                                date=meeting_info[4],hour=meeting_info[5],location=meeting_info[6],
                                meeting_link = meeting_info[7],chatroom_id=meeting_info[8])
 
-        return meetingModel
+        return {meeting_id : meetingModel}
 
     except:
         print("Data not found")
