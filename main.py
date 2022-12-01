@@ -57,10 +57,10 @@ async def getAllMeetings(user_id: Optional[int] = None):
                                  chatroom_id = result[8]
                             )
         all_meetings.append(temp_meeting)
-
+        print(all_meetings)
     # Converting tuple to json model our result
 
-    return {"messages": all_meetings}
+    return {"meetings_of_user": all_meetings}
 
 
 
