@@ -60,7 +60,7 @@ async def getAllMeetings(user_id: Optional[int] = None):
         print(all_meetings)
     # Converting tuple to json model our result
 
-    return {"meetings_of_user": all_meetings}
+    return {all_meetings}
 
 
 
