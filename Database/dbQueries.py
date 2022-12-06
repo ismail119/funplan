@@ -33,6 +33,7 @@ def insertMeeting(meeting):
     query = "INSERT INTO meetings(meeting_hoster,meeting_participants,meeting_name,meeting_date," \
             "meeting_hour,meeting_location,meeting_link) VALUES (%s,'%s','%s','%s','%s','%s','%s')"\
             %(meeting.hoster,meeting.participants,meeting.meeting_name,meeting.date,meeting.hour,meeting.location,meeting.meeting_link)
+    print(query)
     try:
         cursor = getCursor()
         cursor.execute(query)
@@ -43,7 +44,6 @@ def insertMeeting(meeting):
 
 def getMeetings(user_id):
     query = " SELECT * FROM meetings WHERE meeting_participants like '%s' order by meeting_date DESC" % "%{}%".format(user_id)
-    print(query)
     cursor = getCursor()
     cursor.execute(query)
     results = cursor.fetchall()

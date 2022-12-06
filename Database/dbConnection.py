@@ -8,6 +8,7 @@ DATABASE_URL = "postgresql://doadmin:AVNS_NuifHz0JeZ080YiuFfj@db-postgresql-nyc1
 def getCursor():
     return Singleton.instance().cursor()
 
+
 def commit():
     Singleton.connection.commit()
 
