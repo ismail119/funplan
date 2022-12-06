@@ -81,9 +81,9 @@ async def addUser(new_user: Optional[Users]=None):
 
 # Post New Meeting into database
 @app.post('/newMeeting')
-async def addMeeting(new_meeting: str):
-    print(new_meeting)
-    return new_meeting
+async def addMeeting(new_meeting: Meeting):
+    result = insertMeeting(new_meeting)
+    return result
 
     """
         {
