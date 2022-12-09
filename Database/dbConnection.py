@@ -6,7 +6,7 @@ DATABASE_URL = "postgresql://doadmin:AVNS_NuifHz0JeZ080YiuFfj@db-postgresql-nyc1
 
 
 def getCursor():
-    return Singleton.instance().cursor()
+    return Singleton.instance(True).cursor()
 
 
 def commit():
@@ -22,7 +22,10 @@ class Singleton:
             Singleton.connection = psycopg2.connect(DATABASE_URL)
 
     @staticmethod
-    def instance():
+    def instance(shouldUpdate):
+        if shouldUpdate:
+            return psycopg2.connect(DATABASE_URL)
+
         if Singleton.connection is None:
             Singleton()
         return Singleton.connection
