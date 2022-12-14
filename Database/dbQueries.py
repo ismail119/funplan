@@ -16,12 +16,12 @@ def getMessagesFromChatroom(room_id):
     return results
 
 
-def UserController(user):
-    query = "SELECT * FROM users WHERE user_email = '%s' and user_password= '%s' " % (user.email, user.password)
+def UserController(email,password):
+    query = "SELECT user_id FROM users WHERE user_email = '%s' and user_password= '%s' " % (email, password)
     cursor = getCursor()
     cursor.execute(query)
-    results = cursor.fetchall()
-    return len(results) > 0
+    results = cursor.fetchall()[0][0]
+    return results
 
 
 def insertUser(user):
