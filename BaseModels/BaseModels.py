@@ -27,6 +27,6 @@ class Messages(BaseModel):
 
 class Users(BaseModel):
     user_id: Optional[int]
-    username:str
+    username: Optional[str]
     email:str
     password:str
