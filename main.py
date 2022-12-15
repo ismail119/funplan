@@ -68,6 +68,7 @@ async def getAllMeetings(user_id: Optional[int] = None):
 @app.get('/userControl')
 async def userControl(email: str, password:str):
     result = UserController(email,password)
+
     return {"result": result}
 
 # Post New User into database
