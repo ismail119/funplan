@@ -20,9 +20,11 @@ def UserController(email,password):
     query = "SELECT user_id FROM users WHERE user_email = '%s' and user_password= '%s' " % (email, password)
     cursor = getCursor()
     cursor.execute(query)
-    results = cursor.fetchall()[0][0]
-    return results
-
+    results = cursor.fetchall()
+    if len(results)==0:
+        return -1
+    else:
+        return results[0][0]
 
 def insertUser(user):
     query = "INSERT INTO users(user_name,user_email,user_password) VALUES('%s','%s','%s')"\
