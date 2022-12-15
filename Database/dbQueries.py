@@ -22,7 +22,7 @@ def UserController(email,password):
     cursor.execute(query)
     results = cursor.fetchall()
     if len(results)==0:
-        return "none","none"
+        return -1,"none"
     else:
         return results[0][0], str(results[0][1]).rstrip()
 
