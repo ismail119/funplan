@@ -17,14 +17,14 @@ def getMessagesFromChatroom(room_id):
 
 
 def UserController(email,password):
-    query = "SELECT user_id FROM users WHERE user_email = '%s' and user_password= '%s' " % (email, password)
+    query = "SELECT user_id,user_name FROM users WHERE user_email = '%s' and user_password= '%s' " % (email, password)
     cursor = getCursor()
     cursor.execute(query)
     results = cursor.fetchall()
     if len(results)==0:
-        return -1
+        return "none","none"
     else:
-        return results[0][0]
+        return results[0][0], str(results[0][1]).rstrip()
 
 def insertUser(user):
     query = "INSERT INTO users(user_name,user_email,user_password) VALUES('%s','%s','%s')"\
