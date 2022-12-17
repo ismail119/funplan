@@ -16,11 +16,12 @@ class Meeting(BaseModel):
     chatroom_id: Optional[int]
 
 
-class Messages(BaseModel):
-    id :int
-    chat_room_id:int
+class Message(BaseModel):
+    id : int
+    username: Optional[str]
+    chat_room_id: Optional[int]
     message: str
-    user_id:int
+    user_id: Optional[int]
     date : date
     hour : time
 

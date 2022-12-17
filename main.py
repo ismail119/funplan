@@ -1,6 +1,6 @@
 from typing import Optional
 from fastapi import FastAPI
-from BaseModels.BaseModels import Meeting, Messages, Users
+from BaseModels.BaseModels import Meeting, Message, Users
 from Database.dbQueries import *
 
 app = FastAPI()
@@ -23,27 +23,6 @@ async def meetings(meeting_id: Optional[int] = None):
         print("Data not found")
 
 
-# Get Specific Chatroom's messages
-@app.get("/chatroom")
-async def chatrooms(room_id: Optional[int] = None):
-    try:
-        messages_info = getMessagesFromChatroom(room_id)  # Get Data from database
-
-        messages = list()
-        for message_info in messages_info:
-            messagesModel = Messages(id=message_info[0], chat_room_id=message_info[1],
-                                     message=message_info[2], user_id=message_info[3],
-                                     date=message_info[4], hour=message_info[5])
-            messages.append(messagesModel)
-
-        # Converting tuple to json model our result
-
-        return {"messages" : messages}
-
-    except:
-        print("Data not found")
-
-
 # Get all meetings
 @app.get('/allMeetings')
 async def getAllMeetings(user_id: Optional[int] = None):
@@ -57,10 +36,26 @@ async def getAllMeetings(user_id: Optional[int] = None):
                                  chatroom_id = result[8]
                             )
         all_meetings.append(temp_meeting)
-        print(all_meetings)
-    # Converting tuple to json model our result
 
+    # Converting tuple to json model our result
     return all_meetings
+
+
+@app.get('/allMessages')
+async def allMessages(room_id:Optional[int]=None):
+    results = getMessagesFromChatroom(room_id)
+    room_messages = list()
+    for message in results:
+        temp_message = Message(
+            id = message[0],
+            username = message[1],
+            message = message[2],
+            hour = message[3],
+            date = message[4],
+            user_id = message[5]
+        )
+        room_messages.append(temp_message)
+    return room_messages
 
 
 
@@ -79,9 +74,6 @@ async def userControl(email: str, password:str):
 async def addUser(new_user: Optional[Users]=None):
     result = insertUser(new_user)
     return result
-
-
-
 
 
 # Post New Meeting into database

@@ -7,9 +7,10 @@ def getInfoOfMeeting(meeting_id):
     results = cursor.fetchall()[0]
     return results
 
-
 def getMessagesFromChatroom(room_id):
-    query = "SELECT * FROM messages WHERE chat_room_id = %s ORDER BY message_date DESC, message_hour DESC" % room_id
+    query = "SELECT message_id, user_name,message, message_hour, message_date, users.user_id FROM messages,users" \
+            " WHERE messages.user_id = users.user_id and chat_room_id = %s" \
+            " ORDER BY message_date DESC, message_hour DESC" % room_id
     cursor = getCursor()
     cursor.execute(query)
     results = cursor.fetchall()
