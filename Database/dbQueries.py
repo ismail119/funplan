@@ -1,4 +1,4 @@
-from Database.dbConnection import Singleton,getCursor,commit
+from Database.dbConnection import getCursor,commit
 
 def getInfoOfMeeting(meeting_id):
     query = "SELECT * FROM meetings WHERE meeting_id = %s" % meeting_id
@@ -44,11 +44,13 @@ def insertMeeting(meeting):
     query = "INSERT INTO meetings(meeting_hoster,meeting_participants,meeting_name,meeting_date," \
             "meeting_hour,meeting_location,meeting_link) VALUES (%s,'%s','%s','%s','%s','%s','%s')"\
             %(meeting.hoster,meeting.participants,meeting.meeting_name,meeting.date,meeting.hour,meeting.location,meeting.meeting_link)
-    print(query)
     try:
         cursor = getCursor()
+        print("1")
         cursor.execute(query)
+        print("2")
         commit()
+        print("3")
         return True
     except:
         return False
