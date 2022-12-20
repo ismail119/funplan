@@ -33,7 +33,8 @@ async def getAllMeetings(user_id: Optional[int] = None):
                                  participants=result[2], meeting_name=result[3],
                                  date=result[4], hour=result[5],
                                  location=result[6],meeting_link = result[7],
-                                 chatroom_id = result[8]
+                                 chatroom_id = result[8],
+                                 hoster_name = result[9]
                             )
         all_meetings.append(temp_meeting)
 

@@ -5,8 +5,9 @@ from typing import Optional
 
 #Base Model For Meeting
 class Meeting(BaseModel):
-    id :Optional[int]
-    hoster:int
+    id : Optional[int]
+    hoster: int
+    hoster_name: Optional[str]
     participants: str
     meeting_name:str
     date : date
