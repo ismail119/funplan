@@ -52,12 +52,23 @@ def insertMessage(message):
 
 
 def GetParticipants(meeting_id):
-    query="select distinct  users.user_id, users.user_name, meetings.meeting_participants" \
-          " from users, meetings where meeting_id = {} " \
-          "and meetings.meeting_participants" \
-          " like FORMAT('%s', users.user_id)".format(meeting_id)
+    query= "select meeting_participants from meetings where meeting_id = %s" % meeting_id
+    print(query)
     cursor = getCursor()
     cursor.execute(query)
+    result1 = cursor.fetchall()
+    myStringList = (result1[0][0]).split(',')
+
+    #O(n) ----
+    myIntList = list()
+    for participant_id in myStringList:
+        myIntList.append(int(participant_id))
+    myTuple = tuple(myIntList)
+    #---------
+
+    query2 = "select user_id,user_name from users where user_id in {}".format(myTuple)
+    cursor = getCursor()
+    cursor.execute(query2)
     results = cursor.fetchall()
     return results
 
