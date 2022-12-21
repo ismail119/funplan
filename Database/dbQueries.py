@@ -3,7 +3,11 @@ from Database.dbConnection import getCursor,commit
 def getInfoOfMeeting(meeting_id):
     query = "SELECT * FROM meetings WHERE meeting_id = %s" % meeting_id
     cursor = getCursor()
-    cursor.execute(query)
+    try:
+        cursor.execute(query)
+    except:
+        cursor.execute("rollback")
+        cursor.execute(query)
     results = cursor.fetchall()[0]
     return results
 
@@ -12,7 +16,11 @@ def getMessagesFromChatroom(room_id):
             " WHERE messages.user_id = users.user_id and chat_room_id = %s" \
             " ORDER BY message_date DESC, message_hour DESC" % room_id
     cursor = getCursor()
-    cursor.execute(query)
+    try:
+        cursor.execute(query)
+    except:
+        cursor.execute("rollback")
+        cursor.execute(query)
     results = cursor.fetchall()
     return results
 
@@ -20,7 +28,12 @@ def getMessagesFromChatroom(room_id):
 def UserController(email,password):
     query = "SELECT user_id,user_name FROM users WHERE user_email = '%s' and user_password= '%s' " % (email, password)
     cursor = getCursor()
-    cursor.execute(query)
+
+    try:
+        cursor.execute(query)
+    except:
+        cursor.execute("rollback")
+        cursor.execute(query)
     results = cursor.fetchall()
     if len(results)==0:
         return -1,"none"
@@ -55,7 +68,11 @@ def GetParticipants(meeting_id):
     query= "select meeting_participants from meetings where meeting_id = %s" % meeting_id
     print(query)
     cursor = getCursor()
-    cursor.execute(query)
+    try:
+        cursor.execute(query)
+    except:
+        cursor.execute("rollback")
+        cursor.execute(query)
     result1 = cursor.fetchall()
     myStringList = (result1[0][0]).split(',')
 
@@ -68,7 +85,11 @@ def GetParticipants(meeting_id):
 
     query2 = "select user_id,user_name from users where user_id in {}".format(myTuple)
     cursor = getCursor()
-    cursor.execute(query2)
+    try:
+        cursor.execute(query)
+    except:
+        cursor.execute("rollback")
+        cursor.execute(query2)
     results = cursor.fetchall()
     return results
 
@@ -107,6 +128,10 @@ def getMeetings(user_id):
             "WHERE meetings.meeting_hoster =users.user_id and meeting_participants " \
             "like '%s' order by meeting_date DESC" % "%{}%".format(user_id)
     cursor = getCursor()
-    cursor.execute(query)
+    try:
+        cursor.execute(query)
+    except:
+        cursor.execute("rollback")
+        cursor.execute(query)
     results = cursor.fetchall()
     return results
