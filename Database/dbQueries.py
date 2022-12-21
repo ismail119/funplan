@@ -77,6 +77,24 @@ def DeleteMeeting(meetingId):
         print("delete error")
         return False
 
+
+def AddMeetingWithLink(meetingLink,user_id):
+    query = "update meetings set meeting_participants = CONCAT(meeting_participants ,' ', %s )" \
+            " where meeting_link = '%s' " % (user_id,meetingLink)
+
+    cursor = getCursor()
+    cursor.execute(query)
+    try:
+        commit()
+        return True
+    except:
+        print("insert link meeting error")
+        return False
+
+
+
+
+
 def GetParticipants(meeting_id):
     query= "select meeting_participants from meetings where meeting_id = %s" % meeting_id
     cursor = getCursor()

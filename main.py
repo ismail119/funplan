@@ -84,14 +84,20 @@ async def addMessage(new_message: Optional[Message]=None):
 
 
 @app.delete('/deleteParticipants')
-async  def deleteParticipant(participantId: Optional[int],meetingId:Optional[int]):
+async def deleteParticipant(participantId: Optional[int],meetingId:Optional[int]):
     result = DeleteParticipant(participantId,meetingId)
     return result
 
 
 @app.delete('/deleteMeeting')
-async  def deleteParticipant(meetingId: Optional[int]):
+async def deleteParticipant(meetingId: Optional[int]):
     result = DeleteMeeting(meetingId)
+    return result
+
+
+@app.post('/addMeetingWithLink')
+async def addMeetingWithLink(meetingLink:Optional[str]=None,user_id:Optional[int]=None):
+    result = AddMeetingWithLink(meetingLink,user_id)
     return result
 
 
