@@ -1,6 +1,6 @@
 from typing import Optional
 from fastapi import FastAPI
-from BaseModels.BaseModels import Meeting, Message, Users
+from BaseModels.BaseModels import Meeting, Message, Users,Participant
 from Database.dbQueries import *
 
 app = FastAPI()
@@ -83,10 +83,22 @@ async def addMessage(new_message: Optional[Message]=None):
     result = insertMessage(new_message)
     return result
 
+@app.get('/participants')
+async def getParticipants(meeting_id: Optional[int]):
+    results = GetParticipants(meeting_id)
+    participants = list()
+    for participant in results:
+        temp_participant = Participant(
+            user_id = participant[0],
+            username = participant[1]
+        )
+        participants.append(temp_participant)
+
+    return participants
 
 # Post New Meeting into database
 @app.post('/newMeeting')
-async def addMeeting(new_meeting: Meeting):
+async def addMeeting(new_meeting: Optional[Meeting]=None):
     result = insertMeeting(new_meeting)
     print("result : {}".format(result) )
     return result

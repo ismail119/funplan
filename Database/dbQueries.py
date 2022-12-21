@@ -51,6 +51,17 @@ def insertMessage(message):
         return False
 
 
+def GetParticipants(meeting_id):
+    query="select distinct  users.user_id, users.user_name, meetings.meeting_participants" \
+          " from users, meetings where meeting_id = {} " \
+          "and meetings.meeting_participants" \
+          " like FORMAT('%s', users.user_id)".format(meeting_id)
+    cursor = getCursor()
+    cursor.execute(query)
+    results = cursor.fetchall()
+    return results
+
+
 def insertMeeting(meeting):
     query = "INSERT INTO meetings(meeting_hoster,meeting_participants,meeting_name,meeting_date," \
             "meeting_hour,meeting_location,meeting_link) VALUES (%s,'%s','%s','%s','%s','%s','%s')"\

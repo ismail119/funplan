@@ -32,3 +32,7 @@ class Users(BaseModel):
     username: Optional[str]
     email:str
     password:str
+
+class Participant(BaseModel):
+    user_id: int
+    username: str
