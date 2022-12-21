@@ -64,6 +64,19 @@ def insertMessage(message):
         return False
 
 
+def DeleteMeeting(meetingId):
+    query1 = "delete from meetings where meeting_id = %s" % meetingId
+    cursor = getCursor()
+    cursor.execute(query1)
+    query2 = "delete from messages where chat_room_id = %s" %meetingId
+    cursor.execute(query2)
+    try:
+        commit()
+        return True
+    except:
+        print("delete error")
+        return False
+
 def GetParticipants(meeting_id):
     query= "select meeting_participants from meetings where meeting_id = %s" % meeting_id
     cursor = getCursor()

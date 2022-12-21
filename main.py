@@ -89,6 +89,12 @@ async  def deleteParticipant(participantId: Optional[int],meetingId:Optional[int
     return result
 
 
+@app.delete('/deleteMeeting')
+async  def deleteParticipant(meetingId: Optional[int]):
+    result = DeleteMeeting(meetingId)
+    return result
+
+
 @app.get('/participants')
 async def getParticipants(meeting_id: Optional[int]):
     results = GetParticipants(meeting_id)
