@@ -90,12 +90,12 @@ async def deleteParticipant(participantId: Optional[int],meetingId:Optional[int]
 
 
 @app.delete('/deleteMeeting')
-async def deleteParticipant(meetingId: Optional[int]):
+async def deleteMeeting(meetingId: Optional[int]):
     result = DeleteMeeting(meetingId)
     return result
 
 
-@app.post('/addMeetingWithLink')
+@app.put('/addMeetingWithLink')
 async def addMeetingWithLink(meetingLink:Optional[str]=None,user_id:Optional[int]=None):
     result = AddMeetingWithLink(meetingLink,user_id)
     return result
