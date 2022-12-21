@@ -66,7 +66,6 @@ def insertMessage(message):
 
 def GetParticipants(meeting_id):
     query= "select meeting_participants from meetings where meeting_id = %s" % meeting_id
-    print(query)
     cursor = getCursor()
     try:
         cursor.execute(query)
@@ -77,20 +76,26 @@ def GetParticipants(meeting_id):
     myStringList = (result1[0][0]).split(',')
 
     #O(n) ----
-    myIntList = list()
+    myIntList = ""
     for participant_id in myStringList:
-        myIntList.append(int(participant_id))
-    myTuple = tuple(myIntList)
+        if myIntList == "":
+            myIntList += "{}".format((int(participant_id)))
+        else:
+            myIntList += ",{}".format((int(participant_id)))
+
+    myTuple = "({})".format(myIntList)
+
     #---------
 
     query2 = "select user_id,user_name from users where user_id in {}".format(myTuple)
-    cursor = getCursor()
+    cursor2 = getCursor()
     try:
-        cursor.execute(query)
+        cursor2.execute(query2)
     except:
-        cursor.execute("rollback")
-        cursor.execute(query2)
-    results = cursor.fetchall()
+        cursor2.execute("rollback")
+        cursor2.execute(query2)
+    results = cursor2.fetchall()
+    print("results {}".format(results))
     return results
 
 
