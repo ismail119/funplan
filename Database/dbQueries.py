@@ -78,10 +78,13 @@ def GetParticipants(meeting_id):
     #O(n) ----
     myIntList = ""
     for participant_id in myStringList:
-        if myIntList == "":
-            myIntList += "{}".format((int(participant_id)))
-        else:
-            myIntList += ",{}".format((int(participant_id)))
+        try:
+            if myIntList == "":
+                myIntList += "{}".format((int(participant_id)))
+            else:
+                myIntList += ",{}".format((int(participant_id)))
+        except:
+            print("onemsiz")
 
     myTuple = "({})".format(myIntList)
 
