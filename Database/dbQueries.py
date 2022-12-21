@@ -73,7 +73,7 @@ def GetParticipants(meeting_id):
         cursor.execute("rollback")
         cursor.execute(query)
     result1 = cursor.fetchall()
-    myStringList = (result1[0][0]).split(',')
+    myStringList = (result1[0][0]).split(' ')
 
     #O(n) ----
     myIntList = ""
