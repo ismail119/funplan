@@ -65,7 +65,6 @@ async def allMessages(room_id:Optional[int]=None):
 @app.get('/userControl')
 async def userControl(email: str, password:str):
     id, name  = UserController(email,password)
-
     return {
             "id": id,
             "username":name
