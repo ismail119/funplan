@@ -62,6 +62,22 @@ def GetParticipants(meeting_id):
     return results
 
 
+
+def DeleteParticipant(participantId,meetingId):
+    query = "update meetings set meeting_participants = replace(meeting_participants,'%s','')" \
+            " where meeting_id=%s" %(participantId,meetingId)
+    cursor = getCursor()
+    cursor.execute(query)
+    try:
+        cursor = getCursor()
+        cursor.execute(query)
+        commit()
+        return True
+    except:
+        return False
+
+
+
 def insertMeeting(meeting):
     query = "INSERT INTO meetings(meeting_hoster,meeting_participants,meeting_name,meeting_date," \
             "meeting_hour,meeting_location,meeting_link) VALUES (%s,'%s','%s','%s','%s','%s','%s')"\

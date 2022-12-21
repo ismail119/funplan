@@ -83,6 +83,13 @@ async def addMessage(new_message: Optional[Message]=None):
     result = insertMessage(new_message)
     return result
 
+
+@app.delete('/deleteParticipants')
+async  def deleteParticipant(participantId: Optional[int],meetingId:Optional[int]):
+    result = DeleteParticipant(participantId,meetingId)
+    return result
+
+
 @app.get('/participants')
 async def getParticipants(meeting_id: Optional[int]):
     results = GetParticipants(meeting_id)
