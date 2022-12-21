@@ -39,18 +39,26 @@ def insertUser(user):
         return False
 
 
+def insertMessage(message):
+    query = "INSERT INTO messages(chat_room_id,message,user_id,message_date,message_hour) VALUES(%s,'%s',%s,'%s','%s')"\
+            % (message.chat_room_id,message.message,message.user_id,message.date,message.hour)
+    try:
+        cursor = getCursor()
+        cursor.execute(query)
+        commit()
+        return True
+    except:
+        return False
+
+
 def insertMeeting(meeting):
-    print(meeting)
     query = "INSERT INTO meetings(meeting_hoster,meeting_participants,meeting_name,meeting_date," \
             "meeting_hour,meeting_location,meeting_link) VALUES (%s,'%s','%s','%s','%s','%s','%s')"\
             %(meeting.hoster,meeting.participants,meeting.meeting_name,meeting.date,meeting.hour,meeting.location,meeting.meeting_link)
     try:
         cursor = getCursor()
-        print("1")
         cursor.execute(query)
-        print("2")
         commit()
-        print("3")
         return True
     except:
         return False

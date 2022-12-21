@@ -59,6 +59,8 @@ async def allMessages(room_id:Optional[int]=None):
     return room_messages
 
 
+
+
 # Get all meetings
 @app.get('/userControl')
 async def userControl(email: str, password:str):
@@ -73,6 +75,12 @@ async def userControl(email: str, password:str):
 @app.post('/newUser')
 async def addUser(new_user: Optional[Users]=None):
     result = insertUser(new_user)
+    return result
+
+
+@app.post('/newMessage')
+async def addMessage(new_message: Optional[Message]=None):
+    result = insertMessage(new_message)
     return result
 
 

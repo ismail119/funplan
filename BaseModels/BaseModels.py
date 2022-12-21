@@ -18,13 +18,13 @@ class Meeting(BaseModel):
 
 
 class Message(BaseModel):
-    id : int
+    id : Optional[int]
     username: Optional[str]
-    chat_room_id: Optional[int]
-    message: str
-    user_id: Optional[int]
-    date : date
-    hour : time
+    chat_room_id: Optional[int] #Posting
+    message: str #Posting
+    user_id: Optional[int] #Posting
+    date : date #Posting
+    hour : time #Posting
 
 
 class Users(BaseModel):
