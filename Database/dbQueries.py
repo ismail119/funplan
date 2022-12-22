@@ -150,7 +150,7 @@ def DeleteParticipant(participantId,meetingId):
 
 def insertMeeting(meeting):
     query = "INSERT INTO meetings(meeting_hoster,meeting_participants,meeting_name,meeting_date," \
-            "meeting_hour,meeting_location,meeting_link) VALUES (%s,'%s','%s','%s','%s','%s','%s')"\
+            "meeting_hour,meeting_location,meeting_link) VALUES (%s,'%s ','%s','%s','%s','%s','%s')"\
             %(meeting.hoster,meeting.participants,meeting.meeting_name,meeting.date,meeting.hour,meeting.location,meeting.meeting_link)
     try:
         cursor = getCursor()
