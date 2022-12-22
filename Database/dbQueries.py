@@ -148,6 +148,16 @@ def DeleteParticipant(participantId,meetingId):
 
 
 
+def ChangePassword(user_id,old_password,new_password):
+    query = " UPDATE users SET user_password = '%s' where user_id = %s and user_password = '%s' " %(new_password, user_id, old_password)
+    try:
+        cursor = getCursor()
+        cursor.execute(query)
+        commit()
+        return True
+    except:
+        return False
+
 def insertMeeting(meeting):
     query = "INSERT INTO meetings(meeting_hoster,meeting_participants,meeting_name,meeting_date," \
             "meeting_hour,meeting_location,meeting_link) VALUES (%s,'%s ','%s','%s','%s','%s','%s')"\

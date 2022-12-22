@@ -94,6 +94,11 @@ async def deleteMeeting(meetingId: Optional[int]):
     result = DeleteMeeting(meetingId)
     return result
 
+@app.put('/changePassword')
+async def changePassword(oldPassword:str, newPassword:str,user_id:int):
+    result = ChangePassword(user_id,oldPassword,newPassword)
+    return result
+
 
 @app.put('/addMeetingWithLink')
 async def addMeetingWithLink(meetingLink:Optional[str]=None,user_id:Optional[int]=None):
