@@ -79,7 +79,7 @@ def DeleteMeeting(meetingId):
 
 
 def AddMeetingWithLink(meetingLink,user_id):
-    query = "update meetings set meeting_participants = CONCAT(meeting_participants ,' ', %s )" \
+    query = "update meetings set meeting_participants = CONCAT(meeting_participants ,%s,' ')" \
             " where meeting_link = '%s' " % (user_id,meetingLink)
 
     cursor = getCursor()
@@ -90,7 +90,6 @@ def AddMeetingWithLink(meetingLink,user_id):
     except:
         print("insert link meeting error")
         return False
-
 
 
 
@@ -165,7 +164,7 @@ def getMeetings(user_id):
     query = " SELECT meeting_id,meeting_hoster,meeting_participants,meeting_name,meeting_date,meeting_hour,meeting_location " \
             ",meeting_link,meeting_chatroom_id,user_name  FROM meetings,users " \
             "WHERE meetings.meeting_hoster =users.user_id and meeting_participants " \
-            "like '%s' order by meeting_date DESC" % "%{}%".format(user_id)
+            "like '%s' order by meeting_date DESC" % "%{} %".format(user_id)
     cursor = getCursor()
     try:
         cursor.execute(query)
