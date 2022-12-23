@@ -170,6 +170,19 @@ def insertMeeting(meeting):
     except:
         return False
 
+
+
+def logout(user_id,meeting_id):
+    query = "UPDATE meetings SET meeting_participants = REPLACE('%s ',' ') where meeting_id = %s" %(user_id, meeting_id)
+    cursor = getCursor()
+    try:
+        cursor.execute(query)
+        commit()
+        return True
+    except:
+        return False
+
+
 def getMeetings(user_id):
     query = " SELECT meeting_id,meeting_hoster,meeting_participants,meeting_name,meeting_date,meeting_hour,meeting_location " \
             ",meeting_link,meeting_chatroom_id,user_name  FROM meetings,users " \

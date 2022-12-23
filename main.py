@@ -88,6 +88,11 @@ async def deleteParticipant(participantId: Optional[int],meetingId:Optional[int]
     result = DeleteParticipant(participantId,meetingId)
     return result
 
+@app.put('/logout')
+async def logout(user_id:int,meeting_id:int):
+    result = DeleteParticipant(user_id, meeting_id)
+    return result
+
 
 @app.delete('/deleteMeeting')
 async def deleteMeeting(meetingId: Optional[int]):
