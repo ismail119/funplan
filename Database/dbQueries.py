@@ -199,7 +199,7 @@ def getMeetings(user_id):
     query = " SELECT meeting_id,meeting_hoster,meeting_participants,meeting_name,meeting_date,meeting_hour,meeting_location " \
             ",meeting_link,meeting_chatroom_id,user_name  FROM meetings,users " \
             "WHERE meetings.meeting_hoster =users.user_id and meeting_participants " \
-            "like '%s' order by meeting_date DESC" % "%{} %".format(user_id)
+            "like '%s' order by meeting_date " % "%{} %".format(user_id)
     cursor = getCursor()
     try:
         cursor.execute(query)
