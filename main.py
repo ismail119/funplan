@@ -94,6 +94,11 @@ async def logout(user_id:int,meeting_id:int):
     return result
 
 
+@app.delete('/deleteMessage')
+async  def deleteMessage(messageId:Optional[int]=None):
+    result = DeleteMessage(messageId)
+    return result
+
 @app.delete('/deleteMeeting')
 async def deleteMeeting(meetingId: Optional[int]):
     result = DeleteMeeting(meetingId)

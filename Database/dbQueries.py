@@ -183,6 +183,18 @@ def logout(user_id,meeting_id):
         return False
 
 
+def DeleteMessage(messageId):
+    query = "DELETE FROM messages where message_id = %s" %messageId
+    cursor = getCursor()
+    try:
+        cursor.execute(query)
+        commit()
+        return True
+    except:
+        print("problem with deleting")
+        return False
+
+
 def getMeetings(user_id):
     query = " SELECT meeting_id,meeting_hoster,meeting_participants,meeting_name,meeting_date,meeting_hour,meeting_location " \
             ",meeting_link,meeting_chatroom_id,user_name  FROM meetings,users " \
