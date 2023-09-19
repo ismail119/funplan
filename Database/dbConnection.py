@@ -1,8 +1,8 @@
 import psycopg2
 import os
 
-#DATABASE_URL = os.environ.get('DATABASE_URL')
-DATABASE_URL = "postgresql://doadmin:AVNS_NuifHz0JeZ080YiuFfj@db-postgresql-nyc1-91048-do-user-12763043-0.b.db.ondigitalocean.com:25060/defaultdb?sslmode=require"""
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
 
 class singleton:
     connection = None
